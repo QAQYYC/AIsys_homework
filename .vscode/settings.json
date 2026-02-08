@@ -1,0 +1,6 @@
+{
+    "cmake.sourceDirectory": "/root/AIsys_homework/03Complier/04Backend",
+    "python.analysis.extraPaths": [
+        "${workspaceFolder}/build/lib.linux-x86_64-cpython-310"
+    ]
+}
