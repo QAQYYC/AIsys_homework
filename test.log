@@ -1,0 +1,303 @@
+==PROF== Target process 14800 terminated before first instrumented API call.
+==PROF== Connected to process 14765 (/root/miniconda3/envs/DLModel/bin/python3.10)
+==PROF== Target process 14803 terminated before first instrumented API call.
+==PROF== Target process 14822 terminated before first instrumented API call.
+==PROF== Target process 14823 terminated before first instrumented API call.
+==PROF== Target process 14824 terminated before first instrumented API call.
+ninja: no work to do.
+==PROF== Target process 14825 terminated before first instrumented API call.
+==PROF== Profiling "reduce_kernel": 0%....50%....100% - 9 passes
+==PROF== Profiling "reduce_kernel": 0%....50%....100% - 9 passes
+==PROF== Profiling "reduce_kernel": 0%....50%....100% - 9 passes
+==PROF== Profiling "reduce_kernel": 0%....50%....100% - 9 passes
+tensor([100000.], device='cuda:0')
+==PROF== Disconnected from process 14765
+[14765] python3.10@127.0.0.1
+  void reduce_kernel<(int)256>(const float *, float *, int) (196, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ------------- ------------
+    Metric Name               Metric Unit Metric Value
+    ----------------------- ------------- ------------
+    DRAM Frequency          cycle/nsecond         7.80
+    SM Frequency            cycle/nsecond         1.88
+    Elapsed Cycles                  cycle         7146
+    Memory Throughput                   %        42.12
+    DRAM Throughput                     %        42.12
+    Duration                      usecond         3.81
+    L1/TEX Cache Throughput             %        39.39
+    L2 Cache Throughput                 %        11.73
+    SM Active Cycles                cycle      4893.50
+    Compute (SM) Throughput             %        26.99
+    ----------------------- ------------- ------------
+
+    OPT   This kernel exhibits low compute throughput and memory bandwidth utilization relative to the peak performance 
+          of this device. Achieved compute throughput and/or memory bandwidth below 60.0% of peak typically indicate    
+          latency issues. Look at Scheduler Statistics and Warp State Statistics for potential reasons.                 
+
+    Section: Launch Statistics
+    -------------------------------- --------------- ---------------
+    Metric Name                          Metric Unit    Metric Value
+    -------------------------------- --------------- ---------------
+    Block Size                                                   256
+    Function Cache Configuration                     CachePreferNone
+    Grid Size                                                    196
+    Registers Per Thread             register/thread              16
+    Shared Memory Configuration Size           Kbyte           32.77
+    Driver Shared Memory Per Block       Kbyte/block            1.02
+    Dynamic Shared Memory Per Block      Kbyte/block            1.02
+    Static Shared Memory Per Block        byte/block               0
+    Threads                                   thread           50176
+    Waves Per SM                                                1.36
+    -------------------------------- --------------- ---------------
+
+    OPT   Estimated Speedup: 50%                                                                                        
+          A wave of thread blocks is defined as the maximum number of blocks that can be executed in parallel on the    
+          target GPU. The number of blocks in a wave depends on the number of multiprocessors and the theoretical       
+          occupancy of the kernel. This kernel launch results in 1 full waves and a partial wave of 51 thread blocks.   
+          Under the assumption of a uniform execution duration of all thread blocks, the partial wave may account for   
+          up to 50.0% of the total kernel runtime with a lower occupancy of 20.8%. Try launching a grid with no         
+          partial wave. The overall impact of this tail effect also lessens with the number of full waves executed for  
+          a grid. See the Hardware Model                                                                                
+          (https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#metrics-hw-model) description for more      
+          details on launch configurations.                                                                             
+
+    Section: Occupancy
+    ------------------------------- ----------- ------------
+    Metric Name                     Metric Unit Metric Value
+    ------------------------------- ----------- ------------
+    Block Limit SM                        block           24
+    Block Limit Registers                 block           16
+    Block Limit Shared Mem                block           16
+    Block Limit Warps                     block            6
+    Theoretical Active Warps per SM        warp           48
+    Theoretical Occupancy                     %          100
+    Achieved Occupancy                        %        79.16
+    Achieved Active Warps Per SM           warp        38.00
+    ------------------------------- ----------- ------------
+
+    OPT   Estimated Speedup: 20.84%                                                                                     
+          This kernel's theoretical occupancy is not impacted by any block limit. The difference between calculated     
+          theoretical (100.0%) and measured achieved occupancy (79.2%) can be the result of warp scheduling overheads   
+          or workload imbalances during the kernel execution. Load imbalances can occur between warps within a block    
+          as well as across blocks of the same kernel. See the CUDA Best Practices Guide                                
+          (https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#occupancy) for more details on           
+          optimizing occupancy.                                                                                         
+
+  void reduce_kernel<(int)256>(const float *, float *, int) (1, 1, 1)x(256, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ------------- ------------
+    Metric Name               Metric Unit Metric Value
+    ----------------------- ------------- ------------
+    DRAM Frequency          cycle/nsecond         7.65
+    SM Frequency            cycle/nsecond         1.85
+    Elapsed Cycles                  cycle         4023
+    Memory Throughput                   %         1.64
+    DRAM Throughput                     %         0.19
+    Duration                      usecond         2.18
+    L1/TEX Cache Throughput             %        10.33
+    L2 Cache Throughput                 %         0.47
+    SM Active Cycles                cycle        95.17
+    Compute (SM) Throughput             %         0.24
+    ----------------------- ------------- ------------
+
+    OPT   This kernel grid is too small to fill the available resources on this device, resulting in only 0.0 full      
+          waves across all SMs. Look at Launch Statistics for more details.                                             
+
+    Section: Launch Statistics
+    -------------------------------- --------------- ---------------
+    Metric Name                          Metric Unit    Metric Value
+    -------------------------------- --------------- ---------------
+    Block Size                                                   256
+    Function Cache Configuration                     CachePreferNone
+    Grid Size                                                      1
+    Registers Per Thread             register/thread              16
+    Shared Memory Configuration Size           Kbyte           32.77
+    Driver Shared Memory Per Block       Kbyte/block            1.02
+    Dynamic Shared Memory Per Block      Kbyte/block            1.02
+    Static Shared Memory Per Block        byte/block               0
+    Threads                                   thread             256
+    Waves Per SM                                                0.01
+    -------------------------------- --------------- ---------------
+
+    OPT   Estimated Speedup: 95.83%                                                                                     
+          The grid for this launch is configured to execute only 1 blocks, which is less than the GPU's 24              
+          multiprocessors. This can underutilize some multiprocessors. If you do not intend to execute this kernel      
+          concurrently with other workloads, consider reducing the block size to have at least one block per            
+          multiprocessor or increase the size of the grid to fully utilize the available hardware resources. See the    
+          Hardware Model (https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#metrics-hw-model)            
+          description for more details on launch configurations.                                                        
+
+    Section: Occupancy
+    ------------------------------- ----------- ------------
+    Metric Name                     Metric Unit Metric Value
+    ------------------------------- ----------- ------------
+    Block Limit SM                        block           24
+    Block Limit Registers                 block           16
+    Block Limit Shared Mem                block           16
+    Block Limit Warps                     block            6
+    Theoretical Active Warps per SM        warp           48
+    Theoretical Occupancy                     %          100
+    Achieved Occupancy                        %        15.32
+    Achieved Active Warps Per SM           warp         7.35
+    ------------------------------- ----------- ------------
+
+    OPT   Estimated Speedup: 84.68%                                                                                     
+          This kernel's theoretical occupancy is not impacted by any block limit. The difference between calculated     
+          theoretical (100.0%) and measured achieved occupancy (15.3%) can be the result of warp scheduling overheads   
+          or workload imbalances during the kernel execution. Load imbalances can occur between warps within a block    
+          as well as across blocks of the same kernel. See the CUDA Best Practices Guide                                
+          (https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#occupancy) for more details on           
+          optimizing occupancy.                                                                                         
+
+  void at::native::reduce_kernel<(int)512, (int)1, at::native::ReduceOp<double, at::native::func_wrapper_t<double, at::native::MinNanFunctor<double>>, unsigned int, double, (int)4>>(T3) (1, 1, 1)x(1, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ------------- ------------
+    Metric Name               Metric Unit Metric Value
+    ----------------------- ------------- ------------
+    DRAM Frequency          cycle/nsecond         5.88
+    SM Frequency            cycle/nsecond         1.42
+    Elapsed Cycles                  cycle         5147
+    Memory Throughput                   %         6.27
+    DRAM Throughput                     %         0.02
+    Duration                      usecond         3.62
+    L1/TEX Cache Throughput             %         6.22
+    L2 Cache Throughput                 %         6.27
+    SM Active Cycles                cycle       145.42
+    Compute (SM) Throughput             %         0.10
+    ----------------------- ------------- ------------
+
+    OPT   This kernel grid is too small to fill the available resources on this device, resulting in only 0.0 full      
+          waves across all SMs. Look at Launch Statistics for more details.                                             
+
+    Section: Launch Statistics
+    -------------------------------- --------------- ---------------
+    Metric Name                          Metric Unit    Metric Value
+    -------------------------------- --------------- ---------------
+    Block Size                                                     1
+    Function Cache Configuration                     CachePreferNone
+    Grid Size                                                      1
+    Registers Per Thread             register/thread              32
+    Shared Memory Configuration Size           Kbyte           32.77
+    Driver Shared Memory Per Block       Kbyte/block            1.02
+    Dynamic Shared Memory Per Block       byte/block               0
+    Static Shared Memory Per Block        byte/block              16
+    Threads                                   thread               1
+    Waves Per SM                                                0.00
+    -------------------------------- --------------- ---------------
+
+    OPT   Estimated Speedup: 3.03%                                                                                      
+          Threads are executed in groups of 32 threads called warps. This kernel launch is configured to execute 1      
+          threads per block. Consequently, some threads in a warp are masked off and those hardware resources are       
+          unused. Try changing the number of threads per block to be a multiple of 32 threads. Between 128 and 256      
+          threads per block is a good initial range for experimentation. Use smaller thread blocks rather than one      
+          large thread block per multiprocessor if latency affects performance.  This is particularly beneficial to     
+          kernels that frequently call __syncthreads(). See the Hardware Model                                          
+          (https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#metrics-hw-model) description for more      
+          details on launch configurations.                                                                             
+    ----- --------------------------------------------------------------------------------------------------------------
+    OPT   Estimated Speedup: 95.83%                                                                                     
+          The grid for this launch is configured to execute only 1 blocks, which is less than the GPU's 24              
+          multiprocessors. This can underutilize some multiprocessors. If you do not intend to execute this kernel      
+          concurrently with other workloads, consider reducing the block size to have at least one block per            
+          multiprocessor or increase the size of the grid to fully utilize the available hardware resources. See the    
+          Hardware Model (https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#metrics-hw-model)            
+          description for more details on launch configurations.                                                        
+
+    Section: Occupancy
+    ------------------------------- ----------- ------------
+    Metric Name                     Metric Unit Metric Value
+    ------------------------------- ----------- ------------
+    Block Limit SM                        block           24
+    Block Limit Registers                 block           64
+    Block Limit Shared Mem                block           28
+    Block Limit Warps                     block           48
+    Theoretical Active Warps per SM        warp           24
+    Theoretical Occupancy                     %           50
+    Achieved Occupancy                        %         2.08
+    Achieved Active Warps Per SM           warp            1
+    ------------------------------- ----------- ------------
+
+    OPT   Estimated Speedup: 95.83%                                                                                     
+          This kernel's theoretical occupancy (50.0%) is limited by the number of blocks that can fit on the SM. The    
+          difference between calculated theoretical (50.0%) and measured achieved occupancy (2.1%) can be the result    
+          of warp scheduling overheads or workload imbalances during the kernel execution. Load imbalances can occur    
+          between warps within a block as well as across blocks of the same kernel. See the CUDA Best Practices Guide   
+          (https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#occupancy) for more details on           
+          optimizing occupancy.                                                                                         
+
+  void at::native::reduce_kernel<(int)512, (int)1, at::native::ReduceOp<double, at::native::func_wrapper_t<double, at::native::MaxNanFunctor<double>>, unsigned int, double, (int)4>>(T3) (1, 1, 1)x(1, 1, 1), Context 1, Stream 7, Device 0, CC 8.9
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ------------- ------------
+    Metric Name               Metric Unit Metric Value
+    ----------------------- ------------- ------------
+    DRAM Frequency          cycle/nsecond            6
+    SM Frequency            cycle/nsecond         1.44
+    Elapsed Cycles                  cycle         5153
+    Memory Throughput                   %         3.42
+    DRAM Throughput                     %         0.02
+    Duration                      usecond         3.58
+    L1/TEX Cache Throughput             %         6.71
+    L2 Cache Throughput                 %         3.42
+    SM Active Cycles                cycle       134.75
+    Compute (SM) Throughput             %         0.10
+    ----------------------- ------------- ------------
+
+    OPT   This kernel grid is too small to fill the available resources on this device, resulting in only 0.0 full      
+          waves across all SMs. Look at Launch Statistics for more details.                                             
+
+    Section: Launch Statistics
+    -------------------------------- --------------- ---------------
+    Metric Name                          Metric Unit    Metric Value
+    -------------------------------- --------------- ---------------
+    Block Size                                                     1
+    Function Cache Configuration                     CachePreferNone
+    Grid Size                                                      1
+    Registers Per Thread             register/thread              32
+    Shared Memory Configuration Size           Kbyte           32.77
+    Driver Shared Memory Per Block       Kbyte/block            1.02
+    Dynamic Shared Memory Per Block       byte/block               0
+    Static Shared Memory Per Block        byte/block              16
+    Threads                                   thread               1
+    Waves Per SM                                                0.00
+    -------------------------------- --------------- ---------------
+
+    OPT   Estimated Speedup: 3.03%                                                                                      
+          Threads are executed in groups of 32 threads called warps. This kernel launch is configured to execute 1      
+          threads per block. Consequently, some threads in a warp are masked off and those hardware resources are       
+          unused. Try changing the number of threads per block to be a multiple of 32 threads. Between 128 and 256      
+          threads per block is a good initial range for experimentation. Use smaller thread blocks rather than one      
+          large thread block per multiprocessor if latency affects performance.  This is particularly beneficial to     
+          kernels that frequently call __syncthreads(). See the Hardware Model                                          
+          (https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#metrics-hw-model) description for more      
+          details on launch configurations.                                                                             
+    ----- --------------------------------------------------------------------------------------------------------------
+    OPT   Estimated Speedup: 95.83%                                                                                     
+          The grid for this launch is configured to execute only 1 blocks, which is less than the GPU's 24              
+          multiprocessors. This can underutilize some multiprocessors. If you do not intend to execute this kernel      
+          concurrently with other workloads, consider reducing the block size to have at least one block per            
+          multiprocessor or increase the size of the grid to fully utilize the available hardware resources. See the    
+          Hardware Model (https://docs.nvidia.com/nsight-compute/ProfilingGuide/index.html#metrics-hw-model)            
+          description for more details on launch configurations.                                                        
+
+    Section: Occupancy
+    ------------------------------- ----------- ------------
+    Metric Name                     Metric Unit Metric Value
+    ------------------------------- ----------- ------------
+    Block Limit SM                        block           24
+    Block Limit Registers                 block           64
+    Block Limit Shared Mem                block           28
+    Block Limit Warps                     block           48
+    Theoretical Active Warps per SM        warp           24
+    Theoretical Occupancy                     %           50
+    Achieved Occupancy                        %         2.08
+    Achieved Active Warps Per SM           warp            1
+    ------------------------------- ----------- ------------
+
+    OPT   Estimated Speedup: 95.83%                                                                                     
+          This kernel's theoretical occupancy (50.0%) is limited by the number of blocks that can fit on the SM. The    
+          difference between calculated theoretical (50.0%) and measured achieved occupancy (2.1%) can be the result    
+          of warp scheduling overheads or workload imbalances during the kernel execution. Load imbalances can occur    
+          between warps within a block as well as across blocks of the same kernel. See the CUDA Best Practices Guide   
+          (https://docs.nvidia.com/cuda/cuda-c-best-practices-guide/index.html#occupancy) for more details on           
+          optimizing occupancy.                                                                                         
+
